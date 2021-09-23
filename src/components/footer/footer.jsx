@@ -61,11 +61,8 @@ function Footer() {
         <div className={styles['footer__socials']}>
           <ul className={styles['footer__socials-list']}>
             <li className={styles['footer__socials-item']}>
-              <a
-                href='facebook.com'
-                className={styles['footer__socials-link']}
-              >
-                <img src={facebook} alt="facebook" />
+              <a href='facebook.com' className={styles['footer__socials-link']}>
+                <img src={facebook} alt='facebook' />
               </a>
             </li>
             <li className={styles['footer__socials-item']}>
@@ -73,23 +70,17 @@ function Footer() {
                 href='instagram.com'
                 className={styles['footer__socials-link']}
               >
-                <img src={instagram} alt="instagram" />
+                <img src={instagram} alt='instagram' />
               </a>
             </li>
             <li className={styles['footer__socials-item']}>
-              <a
-                href='twitter.com'
-                className={styles['footer__socials-link']}
-              >
-                <img src={twitter} alt="twitter" />
+              <a href='twitter.com' className={styles['footer__socials-link']}>
+                <img src={twitter} alt='twitter' />
               </a>
             </li>
             <li className={styles['footer__socials-item']}>
-              <a
-                href='youtube.com'
-                className={styles['footer__socials-link']}
-              >
-                <img src={youtube} alt="youtube" />
+              <a href='youtube.com' className={styles['footer__socials-link']}>
+                <img src={youtube} alt='youtube' />
               </a>
             </li>
           </ul>
