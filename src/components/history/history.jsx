@@ -15,7 +15,7 @@ function History() {
           wantCurrency={'USD'}
         />
       </ul>
-      <Button text='Очистить историю' />
+      <Button text='Очистить историю' mod='button--small'/>
     </section>
   );
 }

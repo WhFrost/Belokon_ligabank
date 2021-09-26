@@ -1,0 +1,38 @@
+.site-nav__list {
+  display: flex;
+  margin-right: auto;
+  padding-top: 10px;
+}
+
+.site-nav__item:not(:last-child) {
+  margin-right: 25px;
+}
+
+.site-nav__link {
+  display: block;
+
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  font-style: normal;
+}
+
+.site-nav__link:hover {
+  color: #2c36f2;
+
+  opacity: 0.9;
+
+  transition: opacity 0.3s;
+}
+
+.site-nav__link:active {
+  color: #2c36f2;
+
+  opacity: 0.7;
+
+  transition: opacity 0.3s;
+}
+
+.site-nav__link--active {
+  color: #2c36f2;
+}

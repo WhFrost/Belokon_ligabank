@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styles from './button.module.scss';
 
 function Button(props) {
-  const { text, onClick } = props;
+  const {text, onClick, mod} = props;
   return (
-    <button className={styles['button']} onClick={onClick}>
+    <button className={`${styles['button']} ${styles[mod]}`} onClick={onClick}>
       {text}
     </button>
   );
@@ -14,6 +14,7 @@ function Button(props) {
 Button.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  mod: PropTypes.string,
 };
 
 export default Button;

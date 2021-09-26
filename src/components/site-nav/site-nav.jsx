@@ -10,22 +10,22 @@ function SiteNav() {
         </a>
       </li>
       <li className={styles['site-nav__item']}>
-        <a href='/' className='site-nav__link'>
+        <a href='/' className={styles['site-nav__link']}>
           Рассчитать кредит
         </a>
       </li>
       <li className={styles['site-nav__item']}>
-        <a href='/' className='site-nav__link'>
+        <a href='/' className={`${styles['site-nav__link']} ${styles['site-nav__link--active']}`}>
           Конвертер валют
         </a>
       </li>
       <li className={styles['site-nav__item']}>
-        <a href='/' className='site-nav__link'>
+        <a href='/' className={styles['site-nav__link']}>
           Контакты
         </a>
       </li>
       <li className={styles['site-nav__item']}>
-        <a href='/' className='site-nav__link'>
+        <a href='/' className={styles['site-nav__link']}>
           Задать вопрос
         </a>
       </li>

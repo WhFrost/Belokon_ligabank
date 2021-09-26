@@ -45,7 +45,7 @@ function Converter() {
                 <label htmlFor="date">Выбрать дату</label>
                 <input type='date' id="date" className={styles['converter__date-field']}/>
               </div>
-              <Button text='Сохранить результат' />
+              <Button text='Сохранить результат' mod='button--large'/>
             </div>
           </fieldset>
         </form>

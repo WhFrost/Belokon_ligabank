@@ -1,4 +1,5 @@
 import React from 'react';
+import globalStyles from './app.module.scss';
 import Header from '../header/header';
 import Promo from '../promo/promo';
 import Converter from '../converter/converter';
@@ -9,9 +10,14 @@ function App() {
   return (
     <>
       <Header />
-      <Promo />
-      <Converter />
-      <History />
+      <main>
+        <h1 className={globalStyles['visually-hidden']}>
+          Страница сайта Лига Банка с конвертером валют
+        </h1>
+        <Promo />
+        <Converter />
+        <History />
+      </main>
       <Footer />
     </>
   );
