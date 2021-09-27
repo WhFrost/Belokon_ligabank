@@ -5,7 +5,7 @@ function SiteNav() {
   return (
     <ul className={styles['site-nav__list']}>
       <li className={styles['site-nav__item']}>
-        <a href='/' className='site-nav__link'>
+        <a href='/' className={styles['site-nav__link']}>
           Услуги
         </a>
       </li>

@@ -13,8 +13,10 @@ function HistoryItem(props) {
   return (
     <li className={styles['history__item']}>
       <span className={styles['history__date']}>{date}</span>
-      <span className={styles['history__have-currency']}>{`${availableCurrencyQuantity} ${haveCurrency}`}</span>
-      <span className={styles['history__want-currency']}>{`${wantCurrencyQuantity} ${wantCurrency}`}</span>
+      <div className={styles['history__currency']}>
+        <span className={styles['history__have-currency']}>{`${availableCurrencyQuantity} ${haveCurrency}`}</span>
+        <span className={styles['history__want-currency']}>{`${wantCurrencyQuantity} ${wantCurrency}`}</span>
+      </div>
     </li>
   );
 }

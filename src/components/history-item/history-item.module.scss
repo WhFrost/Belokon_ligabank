@@ -1,0 +1,28 @@
+.history__item {
+  display: flex;
+  padding-bottom: 33px;
+
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+  color: #1f1e25;
+  font-style: normal;
+}
+
+.history__date {
+  margin-right: 40px;
+}
+
+.history__currency {
+  display: flex;
+  justify-content: center;
+}
+
+.history__have-currency::after {
+  content: url('../../assets/img/right-arrow.svg');
+
+  margin-right: 13px;
+  margin-left: 13px;
+
+  vertical-align: middle;
+}
