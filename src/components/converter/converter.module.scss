@@ -98,6 +98,7 @@
   margin-right: 15px;
   padding-top: 13px;
   padding-bottom: 13px;
+  padding-left: 15px;
 
   font-weight: 500;
   font-size: 24px;
@@ -132,4 +133,24 @@
   cursor: pointer;
 
   appearance: none;
+}
+
+.converter__date-field {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 390px;
+  padding-top: 14px;
+  padding-right: 5px;
+  padding-bottom: 8px;
+
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 34px;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  color: #000000;
+
+  border: 1px solid #1f1e25;
+  border-radius: 4px;
+  cursor: pointer;
 }

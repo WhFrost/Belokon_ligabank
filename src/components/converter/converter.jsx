@@ -30,6 +30,7 @@ function Converter() {
                   type='number'
                   id='available-quantity'
                   className={styles['converter__currency-field']}
+                  value='1000'
                 />
                 <select
                   id='have-currency'
@@ -55,6 +56,7 @@ function Converter() {
                   type='number'
                   id='want-quantity'
                   className={styles['converter__currency-field']}
+                  value='13.1234'
                 />
                 <select
                   id='want-currency'
