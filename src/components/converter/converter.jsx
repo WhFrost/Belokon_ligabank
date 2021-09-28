@@ -4,7 +4,8 @@ import globalStyles from '../app/app.module.scss';
 import Button from '../button/button';
 import Calendar from 'react-calendar';
 import dayjs from 'dayjs';
-import { MAX_HISTORY_DAYS } from '../../const';
+import { MAX_HISTORY_DAYS, CurrencyCodes } from '../../const';
+import { nanoid } from 'nanoid';
 
 function Converter() {
   const [currentDate, setCurrentDate] = useState(dayjs().toDate());
@@ -70,11 +71,9 @@ function Converter() {
                   id='have-currency'
                   className={styles['converter__currency-type']}
                 >
-                  <option value='RUB'>RUB</option>
-                  <option value='USD'>USD</option>
-                  <option value='EUR'>EUR</option>
-                  <option value='GBR'>GBR</option>
-                  <option value='CNY'>CNY</option>
+                  {
+                    CurrencyCodes.map((currencyCode) => <option value={currencyCode} key={nanoid()}>{currencyCode}</option>)
+                  }
                 </select>
               </div>
             </div>
@@ -96,11 +95,9 @@ function Converter() {
                   id='want-currency'
                   className={styles['converter__currency-type']}
                 >
-                  <option value='RUB'>RUB</option>
-                  <option value='USD'>USD</option>
-                  <option value='EUR'>EUR</option>
-                  <option value='GBR'>GBR</option>
-                  <option value='CNY'>CNY</option>
+                  {
+                    CurrencyCodes.map((currencyCode) => <option value={currencyCode} key={nanoid()}>{currencyCode}</option>)
+                  }
                 </select>
               </div>
             </div>
