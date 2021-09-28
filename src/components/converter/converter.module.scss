@@ -41,8 +41,20 @@
   align-items: flex-start;
 }
 
-.converter__field-wrapper:nth-child(2) {
+.converter__field-wrapper {
   position: relative;
+}
+
+.converter__field-wrapper:nth-child(2):after {
+  content: '';
+  position: absolute;
+  top: 62px;
+  right: -92px;
+
+  width: 56px;
+  height: 36px;
+
+  background: url('../../assets/img/arrows.svg');
 }
 
 .converter__field-label {
@@ -77,18 +89,6 @@
   position: relative;
 
   display: flex;
-}
-
-.converter__field-wrapper::after {
-  content: '';
-  position: absolute;
-  top: 62px;
-  right: -92px;
-
-  width: 56px;
-  height: 36px;
-
-  background: url('../../assets/img/arrows.svg');
 }
 
 .converter__currency-field {

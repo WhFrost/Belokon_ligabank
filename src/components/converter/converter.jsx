@@ -3,7 +3,6 @@ import styles from './converter.module.scss';
 import globalStyles from '../app/app.module.scss';
 import Button from '../button/button';
 // import Calendar from 'react-calendar';
-import 'react-datepicker/dist/react-datepicker.css';
 // import dayjs from 'dayjs';
 
 function Converter() {
