@@ -1,11 +1,46 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './converter.module.scss';
 import globalStyles from '../app/app.module.scss';
 import Button from '../button/button';
-// import Calendar from 'react-calendar';
-// import dayjs from 'dayjs';
+import Calendar from 'react-calendar';
+import dayjs from 'dayjs';
+import { MAX_HISTORY_DAYS } from '../../const';
 
 function Converter() {
+  const [currentDate, setCurrentDate] = useState(dayjs().toDate());
+  const [showCalendar, setShowCalendar] = useState(false);
+
+  console.log(currentDate);
+
+  const handleCalendarIconClick = () => {
+    setShowCalendar(true);
+  };
+
+  const hadleCalendarClick = (value) => {
+    setCurrentDate(value);
+    setShowCalendar(false);
+  };
+
+  const calendarRef = useRef();
+  const hadleCalendarClickOutside = (evt) => {
+    if (
+      evt.target !== calendarRef.current ||
+      !calendarRef.current.contains(evt.target)
+    ) {
+      setShowCalendar(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showCalendar) {
+      window.addEventListener('click', hadleCalendarClickOutside);
+    }
+
+    return () => {
+      window.removeEventListener('click', hadleCalendarClickOutside);
+    };
+  }, [showCalendar]);
+
   return (
     <section className={styles['converter']}>
       <div
@@ -80,10 +115,30 @@ function Converter() {
               </label>
               <div className={styles['converter__fields-group-wrapper']}>
                 <input
-                  type='date'
+                  type='text'
                   id='date'
                   className={styles['converter__date-field']}
+                  value={dayjs(currentDate).format('D.MM.YYYY')}
                 />
+                <button
+                  type='button'
+                  className={styles['converter__calendar-icon']}
+                  onClick={handleCalendarIconClick}
+                >
+                </button>
+                {showCalendar && (
+                  <div
+                    ref={calendarRef}
+                    className={styles['converter__calendar-wrapper']}
+                  >
+                    <Calendar
+                      onChange={hadleCalendarClick}
+                      value={currentDate}
+                      maxDate={dayjs().toDate()}
+                      minDate={dayjs().subtract(MAX_HISTORY_DAYS, 'day').toDate()}
+                    />
+                  </div>
+                )}
               </div>
             </div>
             <Button text='Сохранить результат' mod='button--large' />
