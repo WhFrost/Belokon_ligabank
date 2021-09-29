@@ -5,7 +5,11 @@ import styles from './button.module.scss';
 function Button(props) {
   const {text, onClick, mod} = props;
   return (
-    <button className={`${styles['button']} ${styles[mod]}`} onClick={onClick}>
+    <button
+      type='button'
+      className={`${styles['button']} ${styles[mod]}`}
+      onClick={onClick}
+    >
       {text}
     </button>
   );

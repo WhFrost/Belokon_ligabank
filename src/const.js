@@ -1,4 +1,5 @@
 const MAX_HISTORY_DAYS = 7;
+const MAX_HISTORY_OPERATIONS = 10;
 
 const CurrencyCode = {
   RUB: 'RUB',
@@ -23,6 +24,7 @@ const ROUND_LIMIT = 10000;
 
 export {
   MAX_HISTORY_DAYS,
+  MAX_HISTORY_OPERATIONS,
   CurrencyCode,
   currencyCodes,
   RequestResult,

@@ -31,6 +31,7 @@ function Converter(props) {
     onWantQuantityChange,
     onWantCurrencyChange,
     onDateExchangeRatesChange,
+    onSaveOperationClick,
   } = props;
 
   const [showCalendar, setShowCalendar] = useState(false);
@@ -182,7 +183,16 @@ function Converter(props) {
                 )}
               </div>
             </div>
-            <Button text='Сохранить результат' mod='button--large' />
+            <Button
+              text='Сохранить результат'
+              mod='button--large'
+              onClick={() => onSaveOperationClick(
+                {availableQuantity,
+                  availableCurrency,
+                  wantQuantity,
+                  wantCurrency,
+                  exchangeDateRates})}
+            />
           </fieldset>
         </form>
       </div>
@@ -202,6 +212,7 @@ Converter.propTypes ={
   onWantQuantityChange: PropTypes.func,
   onWantCurrencyChange: PropTypes.func,
   onDateExchangeRatesChange: PropTypes.func,
+  onSaveOperationClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -240,6 +251,10 @@ const mapDispatchToProps = (dispatch) => ({
   onDateExchangeRatesChange(date) {
     dispatch(ActionCreator.setDateExchangeRates(date));
     dispatch(fetchExchangeRatesData(date));
+  },
+
+  onSaveOperationClick(data) {
+    dispatch(ActionCreator.addOperationToHistory(data));
   },
 });
 
