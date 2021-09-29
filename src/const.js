@@ -7,9 +7,25 @@ const CurrencyCode = {
   GBP: 'GBP',
   CNY: 'CNY',
 };
-const CurrencyCodes = Object.values(CurrencyCode);
+const currencyCodes = Object.values(CurrencyCode);
+
+const RequestResult = {
+  SUCCEEDED: 'succeeded',
+  FAILED: 'failed',
+};
+
+const RequestStatus = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+};
+
+const ROUND_LIMIT = 10000;
 
 export {
   MAX_HISTORY_DAYS,
-  CurrencyCodes
+  CurrencyCode,
+  currencyCodes,
+  RequestResult,
+  RequestStatus,
+  ROUND_LIMIT
 };

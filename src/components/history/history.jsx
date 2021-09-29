@@ -19,41 +19,6 @@ function History() {
             wantCurrencyQuantity={13.1234}
             wantCurrency={'USD'}
           />
-          <HistoryItem
-            date={'25.11.2020'}
-            availableCurrencyQuantity={1000}
-            haveCurrency={'RUB'}
-            wantCurrencyQuantity={13.1234}
-            wantCurrency={'USD'}
-          />
-          <HistoryItem
-            date={'25.11.2020'}
-            availableCurrencyQuantity={1000}
-            haveCurrency={'RUB'}
-            wantCurrencyQuantity={13.1234}
-            wantCurrency={'USD'}
-          />
-          <HistoryItem
-            date={'25.11.2020'}
-            availableCurrencyQuantity={1000}
-            haveCurrency={'RUB'}
-            wantCurrencyQuantity={13.1234}
-            wantCurrency={'USD'}
-          />
-          <HistoryItem
-            date={'25.11.2020'}
-            availableCurrencyQuantity={1000}
-            haveCurrency={'RUB'}
-            wantCurrencyQuantity={13.1234}
-            wantCurrency={'USD'}
-          />
-          <HistoryItem
-            date={'25.11.2020'}
-            availableCurrencyQuantity={1000}
-            haveCurrency={'RUB'}
-            wantCurrencyQuantity={13.1234}
-            wantCurrency={'USD'}
-          />
         </ul>
         <Button text='Очистить историю' mod='button--small' />
       </div>

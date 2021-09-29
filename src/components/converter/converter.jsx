@@ -1,29 +1,51 @@
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styles from './converter.module.scss';
 import globalStyles from '../app/app.module.scss';
 import Button from '../button/button';
 import Calendar from 'react-calendar';
 import dayjs from 'dayjs';
-import { MAX_HISTORY_DAYS, CurrencyCodes } from '../../const';
-import { nanoid } from 'nanoid';
+import {MAX_HISTORY_DAYS, currencyCodes} from '../../const';
+import {nanoid} from 'nanoid';
+import {connect} from 'react-redux';
+import {fetchExchangeRatesData} from '../../store/api-actions';
+import {
+  getAvailableQuantity,
+  getAvailableCurrency,
+  getWantQuantity,
+  getWantCurrency,
+  getDateExchangeRates
+} from '../../store/data/selectors';
+import {ActionCreator} from '../../store/action';
 
-function Converter() {
-  const [currentDate, setCurrentDate] = useState(dayjs().toDate());
+function Converter(props) {
+  const {
+    availableQuantity,
+    availableCurrency,
+    wantQuantity,
+    wantCurrency,
+    exchangeDateRates,
+    onComponentRender,
+    onAvailableQuantityChange,
+    onAvailableCurrencyChange,
+    onWantQuantityChange,
+    onWantCurrencyChange,
+    onDateExchangeRatesChange,
+  } = props;
+
   const [showCalendar, setShowCalendar] = useState(false);
-
-  console.log(currentDate);
 
   const handleCalendarIconClick = () => {
     setShowCalendar(true);
   };
 
   const hadleCalendarClick = (value) => {
-    setCurrentDate(value);
     setShowCalendar(false);
+    onDateExchangeRatesChange(dayjs(value));
   };
 
   const calendarRef = useRef();
-  const hadleCalendarClickOutside = (evt) => {
+  const hadleCalendarOutsideClick = (evt) => {
     if (
       evt.target !== calendarRef.current ||
       !calendarRef.current.contains(evt.target)
@@ -33,12 +55,16 @@ function Converter() {
   };
 
   useEffect(() => {
+    onComponentRender(exchangeDateRates);
+  }, []);
+
+  useEffect(() => {
     if (showCalendar) {
-      window.addEventListener('click', hadleCalendarClickOutside);
+      window.addEventListener('click', hadleCalendarOutsideClick);
     }
 
     return () => {
-      window.removeEventListener('click', hadleCalendarClickOutside);
+      window.removeEventListener('click', hadleCalendarOutsideClick);
     };
   }, [showCalendar]);
 
@@ -65,14 +91,24 @@ function Converter() {
                   type='number'
                   id='available-quantity'
                   className={styles['converter__currency-field']}
-                  value='1000'
+                  value={availableQuantity.toString()}
+                  onInput={onAvailableQuantityChange}
                 />
                 <select
-                  id='have-currency'
+                  id='available-quantity'
                   className={styles['converter__currency-type']}
+                  onChange={onAvailableCurrencyChange}
                 >
                   {
-                    CurrencyCodes.map((currencyCode) => <option value={currencyCode} key={nanoid()}>{currencyCode}</option>)
+                    currencyCodes.map((currencyCode) => {
+                      if (currencyCode === availableCurrency) {
+                        return (
+                          <option value={currencyCode} key={nanoid()} selected>{currencyCode}</option>
+                        );
+                      } else {
+                        return <option value={currencyCode} key={nanoid()}>{currencyCode}</option>;
+                      }
+                    })
                   }
                 </select>
               </div>
@@ -89,14 +125,22 @@ function Converter() {
                   type='number'
                   id='want-quantity'
                   className={styles['converter__currency-field']}
-                  value='13.1234'
+                  value={wantQuantity.toString()}
+                  onInput={onWantQuantityChange}
                 />
                 <select
-                  id='want-currency'
+                  id='want-quantity'
                   className={styles['converter__currency-type']}
+                  onChange={onWantCurrencyChange}
                 >
                   {
-                    CurrencyCodes.map((currencyCode) => <option value={currencyCode} key={nanoid()}>{currencyCode}</option>)
+                    currencyCodes.map((currencyCode) => {
+                      if (currencyCode === wantCurrency) {
+                        return <option value={currencyCode} key={nanoid()} selected>{currencyCode}</option>;
+                      } else {
+                        return <option value={currencyCode} key={nanoid()}>{currencyCode}</option>;
+                      }
+                    })
                   }
                 </select>
               </div>
@@ -115,7 +159,7 @@ function Converter() {
                   type='text'
                   id='date'
                   className={styles['converter__date-field']}
-                  value={dayjs(currentDate).format('D.MM.YYYY')}
+                  value={dayjs(exchangeDateRates).format('D.MM.YYYY')}
                 />
                 <button
                   type='button'
@@ -130,7 +174,7 @@ function Converter() {
                   >
                     <Calendar
                       onChange={hadleCalendarClick}
-                      value={currentDate}
+                      value={exchangeDateRates.toDate()}
                       maxDate={dayjs().toDate()}
                       minDate={dayjs().subtract(MAX_HISTORY_DAYS, 'day').toDate()}
                     />
@@ -146,4 +190,57 @@ function Converter() {
   );
 }
 
-export default Converter;
+Converter.propTypes ={
+  availableQuantity: PropTypes.number,
+  availableCurrency: PropTypes.string,
+  wantQuantity: PropTypes.number,
+  wantCurrency: PropTypes.string,
+  exchangeDateRates: PropTypes.object,
+  onComponentRender: PropTypes.func,
+  onAvailableQuantityChange: PropTypes.func,
+  onAvailableCurrencyChange: PropTypes.func,
+  onWantQuantityChange: PropTypes.func,
+  onWantCurrencyChange: PropTypes.func,
+  onDateExchangeRatesChange: PropTypes.func,
+};
+
+const mapStateToProps = (state) => ({
+  availableQuantity: getAvailableQuantity(state),
+  availableCurrency: getAvailableCurrency(state),
+  wantQuantity: getWantQuantity(state),
+  wantCurrency: getWantCurrency(state),
+  exchangeDateRates: getDateExchangeRates(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onComponentRender(date) {
+    dispatch(fetchExchangeRatesData(date));
+  },
+
+  onAvailableQuantityChange(evt) {
+    dispatch(ActionCreator.setAvailableQuantity(Number(evt.target.value)));
+    dispatch(ActionCreator.convertWantQuantity());
+  },
+
+  onAvailableCurrencyChange(evt) {
+    dispatch(ActionCreator.setAvailableCurrency(evt.target.value));
+    dispatch(ActionCreator.convertWantQuantity());
+  },
+
+  onWantQuantityChange(evt) {
+    dispatch(ActionCreator.setWantQuantity(Number(evt.target.value)));
+    dispatch(ActionCreator.convertAvailableQuantity());
+  },
+
+  onWantCurrencyChange(evt) {
+    dispatch(ActionCreator.setWantCurrency(evt.target.value));
+    dispatch(ActionCreator.convertAvailableQuantity());
+  },
+
+  onDateExchangeRatesChange(date) {
+    dispatch(ActionCreator.setDateExchangeRates(date));
+    dispatch(fetchExchangeRatesData(date));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Converter);
